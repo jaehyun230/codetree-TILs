@@ -37,7 +37,7 @@ def check_player_exist(a, b) :
         if a == x and b == y :
             return players[i]
     
-    return [-1]
+    return [-1, -1, -1, -1, -1, -1]
 
 def lose(player) :
     dropgun(player)
