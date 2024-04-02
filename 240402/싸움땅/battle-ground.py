@@ -92,6 +92,7 @@ def getgun(player) :
     update(p)
 
 def move(player) :
+    # print('move', player)
     dropgun(player)
     getgun(player)
     
@@ -112,7 +113,7 @@ def play() :
                 move(p)
         else :
             # 반대 방향 이동
-            d = (d+2)%4
+            d = (d + 2) if d < 2 else (d - 2)
             if 0 <= x + dx[d] < n and 0 <= y + dy[d] < n :
                 p = ((idx, x+dx[d], y+dy[d], d, s, w))
                 p2 = check_player_exist(x+dx[d], y+dy[d])
