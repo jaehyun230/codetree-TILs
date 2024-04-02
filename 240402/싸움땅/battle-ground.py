@@ -37,11 +37,12 @@ def check_player_exist(a, b) :
         if a == x and b == y :
             return players[i]
     
-    return [-1, -1, -1, -1, -1, -1]
+    return [-1]
 
 def lose(player) :
     dropgun(player)
     idx, x, y, d, s, w = player
+    #update 필요
     for i in range(len(players)) :
         if players[i][0] == idx :
             idx, x, y, d, s, w = players[i]
