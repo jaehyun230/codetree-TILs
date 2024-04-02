@@ -42,9 +42,9 @@ def lose(player) :
     idx, x, y, d, s, w = player
     dropgun(player)
     for i in range(4) :
-        md = d + i
-        mx = x + dx[i]
-        my = y + dy[i]
+        md = (d + i)%4
+        mx = x + dx[md]
+        my = y + dy[md]
         if 0 <= mx < n and 0 <= my < n :
             p2 = check_player_exist(mx, my)
             if p2[0] == -1 :
