@@ -67,16 +67,20 @@ def fight(player1, player2) :
     
     if (s+w) > (s2+w2) :
         # 진사람이 떨어진 총 주워야 할 수도 있기 때문
+        update(player1)
         lose(player2)
         win(player1, player2)
     elif (s+w) == (s2+w2) :
         if s > s2 :
+            update(player1)
             lose(player2)
             win(player1, player2)
         else :
+            update(player2)
             lose(player1)
             win(player2, player1)
     else :
+        update(player2)
         lose(player1)
         win(player2, player1)
 
