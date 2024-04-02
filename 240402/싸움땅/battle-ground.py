@@ -15,7 +15,8 @@ dy = [0, 1, 0, -1]
 for i in range(n) :
     data = list(map(int, input().split()))
     for j in range(n) :
-        heapq.heappush(guns[i][j], -1 * data[j])
+        if data[j] != 0 :
+            heapq.heappush(guns[i][j], -1 * data[j])
 
 for i in range(m) :
     x, y, d, s = map(int ,input().split())
@@ -39,8 +40,11 @@ def check_player_exist(a, b) :
     return [-1, -1, -1, -1, -1, -1]
 
 def lose(player) :
-    idx, x, y, d, s, w = player
     dropgun(player)
+    idx, x, y, d, s, w = player
+    for i in range(len(players)) :
+        if players[i][0] == idx :
+            idx, x, y, d, s, w = players[i]
     for i in range(4) :
         md = (d + i)%4
         mx = x + dx[md]
