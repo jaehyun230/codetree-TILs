@@ -24,12 +24,8 @@ for i in range(m) :
 
 def update(player) :
     idx, x, y, d, s, w = player
+    players[idx] = player
 
-    for i in range(m):
-        num, _, _, _, _, _ = players[i]
-        if idx == num:
-            players[i] = player
-            break
     
 def check_player_exist(a, b) :
     for i in range(len(players)) :
