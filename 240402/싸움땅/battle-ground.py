@@ -23,7 +23,12 @@ for i in range(m) :
 
 def update(player) :
     idx, x, y, d, s, w = player
-    players[idx] = player
+
+    for i in range(m):
+        num, _, _, _, _, _ = players[i]
+        if idx == num:
+            players[i] = player
+            break
     
 def check_player_exist(a, b) :
     for i in range(len(players)) :
@@ -92,7 +97,6 @@ def getgun(player) :
     update(p)
 
 def move(player) :
-    # print('move', player)
     dropgun(player)
     getgun(player)
     
@@ -113,7 +117,7 @@ def play() :
                 move(p)
         else :
             # 반대 방향 이동
-            d = (d + 2) if d < 2 else (d - 2)
+            d = (d+2)%4
             if 0 <= x + dx[d] < n and 0 <= y + dy[d] < n :
                 p = ((idx, x+dx[d], y+dy[d], d, s, w))
                 p2 = check_player_exist(x+dx[d], y+dy[d])
