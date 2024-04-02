@@ -40,7 +40,7 @@ def check_player_exist(a, b) :
 
 def lose(player) :
     idx, x, y, d, s, w = player
-
+    dropgun(player)
     for i in range(4) :
         md = d + i
         mx = x + dx[i]
