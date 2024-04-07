@@ -54,9 +54,11 @@ def target_move() :
     if mx == 0 and my == 0 :
         check = 1
         d = (d+2)%4
+        need_d = next_d
     if mx == center and my == center :
         check = 0
         d = (d+2)%4
+        need_d = 1
     
     update(mx, my, d, need_d, next_d, count, check)
 
