@@ -1,5 +1,3 @@
-import sys
-
 n, m, kill_year, c  = map(int, input().split())
 
 graph = []
@@ -71,8 +69,10 @@ def find_score(x, y) :
                 continue
             mx = x + ddx[k]*i
             my = y + ddy[k]*i
-            if 0 <= mx < n and 0 <= my < n and graph[mx][my] >= 1 :
+            if 0 <= mx < n and 0 <= my < n and graph[mx][my] >= 0 :
                 count += graph[mx][my]
+                if graph[mx][my] == 0 :
+                    keep[k] = 0
             else :
                 keep[k] = 0
 
@@ -82,6 +82,7 @@ def find_score(x, y) :
 
 def find_kill() :
     a, b, count = -1, -1, -1
+
 
     for i in range(n) :
         for j in range(n) :
@@ -108,9 +109,14 @@ def kill(x, y) :
 
             mx = x + ddx[k]*i
             my = y + ddy[k]*i
-            if 0 <= mx < n and 0 <= my < n and graph[mx][my] >=1 :
+
+            if 0 <= mx < n and 0 <= my < n and graph[mx][my] >= 0 :
+                if graph[mx][my] == 0 :
+                    keep[k] = 0
                 graph[mx][my] = 0
                 cantgraph[mx][my] = c
+
+
             else :
                 keep[k] = 0
 
@@ -132,7 +138,6 @@ while time < m :
     # 제초제 뿌리기 전에 년도 바꾸기
     tree_count()
     tree_kill()
-
     time +=1
 
 print(answer)
