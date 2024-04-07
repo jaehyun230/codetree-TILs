@@ -1,6 +1,5 @@
+import sys
 from collections import deque
-
-# sys.stdin = open("text.txt", "r")
 
 n, m, k = map(int, input().split())
 
@@ -60,6 +59,7 @@ def find_score(a, b) :
         if graph[x][y] == 1 :
             temp_head.append([x, y])
             answer += d**2
+            # print("d 번쨰가 잡음", d)
 
         elif graph[x][y] == 3 :
             temp_tail.append([x, y])
@@ -69,9 +69,13 @@ def find_score(a, b) :
             my = y + dy[k]
             if 0 <= mx < n and 0 <= my < n and graph[mx][my] != 0 and graph[mx][my] != 4 and visited[mx][my] == False :
                 visited[mx][my] = True
+                if graph[x][y] == 3 and graph[mx][my] == 1 :
+                    visited[mx][my] = False
+                    continue
                 q.append((mx, my, d+1))
 
     change_head_tail(temp_head, temp_tail)
+
 def leftshot(t) :
     for i in range(n) :
         if graph[t][i] != 0 and graph[t][i] != 4 :
@@ -121,6 +125,29 @@ def team_move(h) :
     a, b,  c = h
     #head 라서 1
     q.append((a, b, c, 1))
+
+    # 머리와 꼬리로 전체가 이루어진 경우도 생각 필요
+    for i in range(4) :
+        ma = a +dx[i]
+        mb = b + dy[i]
+        if 0 <= ma < n and 0 <= mb < n and graph[ma][mb] == 3 :
+            graph[ma][mb] = 1
+            graph[a][b] = -2
+            head[c] = [ma, mb, c]
+            a, b = ma, mb
+            q.pop()
+
+    if not q :
+        for i in range(4) :
+            ma = a + dx[i]
+            mb = b + dy[i]
+            if 0 <= ma < n and 0 <= mb < n :
+                if graph[ma][mb] == 2 :
+                    graph[ma][mb] = 3
+                elif graph[ma][mb] == -2 :
+                    graph[ma][mb] = 2
+
+
     while q :
         x, y, c, pos = q.pop()
         for k in range(4) :
@@ -156,5 +183,5 @@ while time < k :
     move()
     shot_ball(time)
     time +=1
-
+# print(graph)
 print(answer)
