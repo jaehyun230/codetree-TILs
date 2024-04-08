@@ -71,7 +71,7 @@ def raserattack(x, y, x2, y2) :
 
 def cannonattack(x, y, x2, y2, power) :
 
-    temp = [[x2, y2]]
+    temp = [[x2, y2], [x, y]]
     for i in range(8) :
         mx = x2 + ddx[i]
         my = y2 + ddy[i]
@@ -144,6 +144,8 @@ def play() :
             for j in range(n) :
                 if graph[i][j] > 0 and [i,j] not in result :
                     graph[i][j] +=1
+                    if i == x and j == y :
+                        graph[i][j] -=1
 
     #공격 안받은 포탑들 공 +1 시켜야함
     update(x, y, power)
