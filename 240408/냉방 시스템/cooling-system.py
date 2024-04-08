@@ -102,11 +102,22 @@ def confusewind() :
         for j in range(n) :
 
             for k in range(4) :
+
                 mx = i + wind_dx[k]
                 my = j + wind_dy[k]
 
                 if 0 <= mx < n and 0 <= my < n :
                     differ = abs(graph_air[i][j] - graph_air[mx][my])//4
+
+                    if wind_dx[k] == -1 and (1 in wall[i][j]):
+                        continue
+                    if wind_dx[k] == 1 and (3 in wall[i][j]):
+                        continue
+                    if wind_dy[k] == 1 and (4 in wall[i][j]):
+                        continue
+                    if wind_dy[k] == -1 and (2 in wall[i][j]):
+                        continue
+                    # 바람 주고받기 전 벽 고려해야함
                     if graph_air[i][j] > graph_air[mx][my] :
                         temp_graph[i][j] -= differ
                         temp_graph[mx][my] += differ
@@ -162,7 +173,7 @@ while time < 101 :
     #조건만족확인시 break
     time+=1
 
-if k >= 101 :
+if time >= 101 :
     print(-1)
 else :
     print(time)
