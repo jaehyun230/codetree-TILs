@@ -1,6 +1,7 @@
 import heapq
 from collections import deque
 
+
 graph = []
 
 powerful = []
@@ -10,7 +11,7 @@ weaker = []
 n, m, K = map(int, input().split())
 
 #최근 공격 시간 따로 관리 heapq 넣을떄 활용
-attack_time = [[0]*n for _ in range(n)]
+attack_time = [[0]*m for _ in range(n)]
 
 for _ in range(n) :
     graph.append(list(map(int, input().split())))
@@ -32,7 +33,7 @@ def in_tower() :
     powerful = []
 
     for i in range(n) :
-        for j in range(n) :
+        for j in range(m) :
             if graph[i][j] > 0 :
                 # 가장 약한 포탑 집어넣기
                 heapq.heappush(weaker, [graph[i][j], attack_time[i][j]*-1, (i+j)*-1, (j)*-1, i*-1])
@@ -43,7 +44,7 @@ def in_tower() :
 def raserattack(x, y, x2, y2) :
     q = deque()
     q.append([x, y, []])
-    visited = [[False]*n for _ in range(n)]
+    visited = [[False]*m for _ in range(n)]
     visited[x][y] = True
 
     while q :
@@ -57,10 +58,10 @@ def raserattack(x, y, x2, y2) :
             if mx < 0 :
                 mx = n-1
             if my < 0 :
-                my = n-1
+                my = m-1
             if mx >= n :
                 mx = 0
-            if my >= n :
+            if my >= m :
                 my = 0
 
             if graph[mx][my] != 0 and visited[mx][my] == False :
@@ -79,10 +80,10 @@ def cannonattack(x, y, x2, y2, power) :
         if mx < 0:
             mx = n - 1
         if my < 0:
-            my = n - 1
+            my = m - 1
         if mx >= n:
             mx = 0
-        if my >= n:
+        if my >= m:
             my = 0
 
         temp.append([mx, my])
@@ -96,7 +97,7 @@ def cannonattack(x, y, x2, y2, power) :
         graph[x2][y2] = 0
 
     for i in range(n) :
-        for j in range(n) :
+        for j in range(m) :
             if graph[i][j] > 0 and [i,j] not in temp :
                 graph[i][j] +=1
 
@@ -142,7 +143,7 @@ def play() :
         calculate_laser_path(result, power)
         result.append([x, y])
         for i in range(n) :
-            for j in range(n) :
+            for j in range(m) :
                 if graph[i][j] > 0 and [i,j] not in result :
                     graph[i][j] +=1
 
@@ -161,7 +162,7 @@ while Time <= K :
 # for 문 돌려야할 듯
 max_val = 0
 for i in range(n) :
-    for j in range(n) :
+    for j in range(m) :
         if graph[i][j] > max_val :
             max_val = graph[i][j]
 
