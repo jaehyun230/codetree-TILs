@@ -140,14 +140,12 @@ def play() :
         cannonattack(x, y, target_x, target_y, power)
     else :
         calculate_laser_path(result, power)
+        result.append([x, y])
         for i in range(n) :
             for j in range(n) :
                 if graph[i][j] > 0 and [i,j] not in result :
                     graph[i][j] +=1
-                    if i == x and j == y :
-                        graph[i][j] -=1
 
-    #공격 안받은 포탑들 공 +1 시켜야함
     update(x, y, power)
 
 
