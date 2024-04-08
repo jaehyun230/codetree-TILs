@@ -9,7 +9,6 @@ m, t = map(int, input().split())
 
 dead_monster = [[0]*4 for _ in range(4)]
 
-graph = [[0]*4 for _ in range(4)]
 # 현재 그래프에 있는 몬스터 수
 now_graph = [[0]*4 for _ in range(4)]
 
