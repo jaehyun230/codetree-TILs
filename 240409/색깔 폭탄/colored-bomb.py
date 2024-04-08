@@ -63,12 +63,31 @@ def letsboom(boom, red) :
         graph[x][y] = -2
 
 
+#기준점 찾기
+def findpoint(data, data2) :
+    pos = [-1, 50]
+
+    for x, y in data :
+        if x > pos[0] :
+            pos[0], pos[1] = x, y
+        elif x == pos[0] and y < pos[1] :
+            pos[0], pos[1] = x, y
+
+    for x, y in data2 :
+        if x > pos[0] :
+            pos[0], pos[1] = x, y
+        elif x == pos[0] and y < pos[1] :
+            pos[0], pos[1] = x, y
+
+    return pos
+
 def findbomb() :
     # 행 높고 열 낮은 우선순위
     visited = [[False]*n for _ in range(n)]
 
     boom = []
     red_boom = []
+    pos = [-1, 50]
 
     for i in range(n-1, -1, -1) :
         for j in range(n) :
@@ -77,13 +96,25 @@ def findbomb() :
                 if len(path) + len(red) > len(boom) + len(red_boom) :
                     boom = path
                     red_boom = red
-                elif len(path) + len(red) == len(boom) + len(red_boom) and len(red) > len(red_boom) :
+                    pos = findpoint(path, red)
+                elif len(path) + len(red) == len(boom) + len(red_boom) and len(red) < len(red_boom) :
                     boom = path
                     red_boom = red
+                    pos = findpoint(path, red)
+                elif len(path) + len(red) == len(boom) + len(red_boom) and len(red) == len(red_boom) :
+                    pos2 = findpoint(path, red)
+                    if pos[0] < pos2[0] :
+                        pos = pos2
+                        boom = path
+                        red_boom = red
+                    elif pos[0] == pos2[0] and pos[1] > pos2[1] :
+                        pos = pos2
+                        boom = path
+                        red_boom = red
+
 
     if len(boom) + len(red_boom) >= 2 :
         letsboom(boom, red_boom)
-
         return True
     # 터트릴 것 못찾음
     return False
