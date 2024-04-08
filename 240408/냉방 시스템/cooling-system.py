@@ -17,8 +17,6 @@ wind_dx = [0, -1, 0, 1]
 wind_dy = [-1, 0, 1, 0]
 
 #3칸별로 왼 위 오 아
-# dx = [-1, 0, 1, -1, -1, -1, -1, 0, 1, 1, 1, 1]
-# dy = [-1, -1, -1, -1, 0, 1, 1, 1, 1, -1, 0, 1
 dx = [[-1, 0, 1], [0, 0, 0], [-1, 0, 1], [0, 0, 0]]
 dy = [[0, 0, 0], [-1, 0, 1], [0, 0, 0], [-1, 0, 1]]
 
@@ -100,30 +98,37 @@ def confusewind() :
 
     for i in range(n) :
         for j in range(n) :
+            for l in range(4) :
 
-            for k in range(4) :
-
-                mx = i + wind_dx[k]
-                my = j + wind_dy[k]
+                mx = i + wind_dx[l]
+                my = j + wind_dy[l]
 
                 if 0 <= mx < n and 0 <= my < n :
-                    differ = abs(graph_air[i][j] - graph_air[mx][my])//4
 
-                    if wind_dx[k] == -1 and (1 in wall[i][j]):
-                        continue
-                    if wind_dx[k] == 1 and (3 in wall[i][j]):
-                        continue
-                    if wind_dy[k] == 1 and (4 in wall[i][j]):
-                        continue
-                    if wind_dy[k] == -1 and (2 in wall[i][j]):
-                        continue
+
                     # 바람 주고받기 전 벽 고려해야함
+                    if wind_dx[l] == -1 and (1 in wall[i][j]):
+                        continue
+                    if wind_dx[l] == 1 and (3 in wall[i][j]):
+                        continue
+                    if wind_dy[l] == 1 and (4 in wall[i][j]):
+                        continue
+                    if wind_dy[l] == -1 and (2 in wall[i][j]):
+                        continue
+
+                    differ = abs(graph_air[i][j] - graph_air[mx][my])
+                    differ = differ // 4
+
                     if graph_air[i][j] > graph_air[mx][my] :
                         temp_graph[i][j] -= differ
                         temp_graph[mx][my] += differ
                     else :
                         temp_graph[i][j] += differ
                         temp_graph[mx][my] -= differ
+
+    for i in range(n) :
+        for j in range(n) :
+            temp_graph[i][j] = temp_graph[i][j]//2
 
     return temp_graph
 
@@ -160,18 +165,20 @@ time = 1
 while time < 101 :
     #에어컨 바람불기
     addgraph = wind()
-
     calculate_air(addgraph)
 
     #바람섞기
     temper = confusewind()
     calculate_air(temper)
+
+
     #외벽깍기
     out_wind_minuse()
     if checker() :
         break
     #조건만족확인시 break
     time+=1
+
 
 if time >= 101 :
     print(-1)
