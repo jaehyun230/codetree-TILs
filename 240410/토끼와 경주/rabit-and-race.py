@@ -12,7 +12,6 @@ data = list(map(int, input().split()))
 n, m, p =  data[1], data[2], data[3]
 
 
-
 # 경기 중 뽑현던 토끼 고려하기
 # 처음 토끼들은 전부 1행, 1열
 rabbit = []
@@ -28,7 +27,7 @@ score = {}
 dx = [-1, 0, 1, 0]
 dy = [0, 1, 0, -1]
 
-for i in range(2, len(data)//2) :
+for i in range(2, p+2) :
     pid, d = data[2*i], data[2*i+1]
 
     # 토끼 이동거리 배수 1배(기본값)
@@ -39,10 +38,8 @@ for i in range(2, len(data)//2) :
     heapq.heappush(rabbit, (0, 0, 0, 0, pid, d))
 
 def outOfRange(nx, ny):
-    # print('nx, ny', nx, ny)
     nx %= 2 * (n - 1)
     ny %= 2 * (n - 1)
-    # print('change nx, ny', nx, ny)
 
     return min(nx, 2*(n - 1) - nx), min(ny, 2*(m - 1) - ny)
 def jump(x, y, pid, d) :
