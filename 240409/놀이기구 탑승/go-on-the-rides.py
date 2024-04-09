@@ -31,7 +31,7 @@ def seat_check(x, y, lover) :
 def find_favorite(info) :
 
     pos = [-1, -1]
-    friend_count, blank_count = 0, 0
+    friend_count, blank_count = -1, -1
 
     for i in range(n) :
         for j in range(n) :
