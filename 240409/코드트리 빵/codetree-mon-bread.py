@@ -8,8 +8,6 @@ n, m = map(int, input().split())
 
 graph = []
 
-base_camp = []
-
 #이동 가능한 사람들 - people 에서 나와 들어갈 부분들
 move_people = []
 
@@ -117,7 +115,6 @@ def move_people_move() :
         ny = ny + dy[dir]
         move_people[i] = [nx, ny, tx, ty]
 
-        # print(i, move_people[i])
 
 
 # 사람들 도착했나 확인
@@ -168,7 +165,4 @@ while True :
 
     time +=1
 
-# print(graph)
-# print(people)
-# print(move_people)
 print(time)
