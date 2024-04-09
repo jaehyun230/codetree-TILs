@@ -2,7 +2,7 @@ n, m = map(int, input().split())
 
 graph = []
 
-dx = [0, 1, 0 ,-1]
+dx = [0, 1, 0, -1]
 dy = [1, 0, -1, 0]
 
 for _ in range(n) :
@@ -10,7 +10,6 @@ for _ in range(n) :
 
 # 포탑은 중앙에서 위치
 center = n//2
-
 
 def destroy(data) :
     global answer
@@ -37,6 +36,10 @@ def destroy(data) :
             count +=1
             end_pos = i
 
+    if count >= 4 :
+        answer += count * value
+        return True, (start_pos, end_pos)
+
     return False, (start_pos, end_pos)
 
 # 달팽이 회전 순서 왼 아래 오른 상향
@@ -58,7 +61,7 @@ def rotation_point() :
     # 그냥 스택에 다 쌓은 다음 하면 되지않을까?
     stack = []
 
-    for _ in range(n ** 2):
+    for _ in range(n**2):
 
         x, y = x + dx[d], y + dy[d]
 
@@ -76,7 +79,7 @@ def rotation_point() :
             stack.append(graph[x][y])
 
     # 스택에 다 쌓은 상태 4개 이상일 경우 삭제
-
+    # print(stack)
     # print(stack)
     while True :
         check, posdata = destroy(stack)
@@ -84,6 +87,8 @@ def rotation_point() :
         if check == False :
             break
         stack = stack[:posdata[0]] + stack[posdata[1] + 1::]
+
+
 
     return stack
 
@@ -197,13 +202,15 @@ def reconstruct(data) :
         if 0 <= x < n and 0 <= y < n :
             temp[x][y] = indata[i]
 
+        if x == 0 and y == 0 :
+            break
+
     graph = temp
 
 answer = 0
 for _ in range(m) :
     # 공격 방향 및 칸수
     d, p = map(int, input().split())
-    # rotation_check()
     attack(d, p)
     remain = rotation_point()
     redata = remodell(remain)
