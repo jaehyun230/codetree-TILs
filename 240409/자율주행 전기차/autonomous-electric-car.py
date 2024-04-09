@@ -116,7 +116,7 @@ while c >= 0 :
     c = c + need_energe
 
     carpos = [nx, ny]
-
+# 안태운 손님 있나 확인
 for i in range(n) :
     for j in range(n) :
         if peoplegraph[i][j] != -1 :
