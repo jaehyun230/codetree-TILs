@@ -117,4 +117,8 @@ while c >= 0 :
 
     carpos = [nx, ny]
 
+for i in range(n) :
+    for j in range(n) :
+        if peoplegraph[i][j] != -1 :
+            c = -1
 print(c)
