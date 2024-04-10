@@ -81,7 +81,8 @@ def move(x, y, h, w, k, d, idx, first_check) :
                     # 해당 나이트 밀었던적 있다고 기록
                     move_sets.add(knights_graph[i][j])
                     # 다른 기사야 너도 움직여라
-                    if move(x2, y2, h2, w2, k2, d, idx2, False) == False :
+                    check =  move(x2, y2, h2, w2, k2, d, idx2, False)
+                    if check == False :
                         # print(i, j, w2)
                         # print("idx에게 idx2 안밀려요", idx, idx2, k2)
                         # print("위치는 여기에요", x2, y2, d)
@@ -103,11 +104,32 @@ def move(x, y, h, w, k, d, idx, first_check) :
 
 def attack(num, d) :
     global move_sets
+
+
+    global alive_knights
+    global knights_graph
+    global knights
+    global knights_score
+
+    temp_live = alive_knights
+    temp_graph = knights_graph
+    temp_knights = knights
+    temp_knights_score = knights_score
+
     move_sets = set()
     x, y, h, w, k, idx = knights[num]
     move_sets.add(idx)
     # 처음 밀려나가는 친구는 점수 계산 안하기 위함
-    move(x, y, h, w, k, d, idx, True)
+
+    check = move(x, y, h, w, k, d, idx, True)
+    # 못움직이는 걸로 결론 나면 이전 행동 모두 취소
+    if check == False :
+        alive_knights = temp_live
+        knights_graph = temp_graph
+        knights = temp_knights
+        knights_score = temp_knights_score
+
+
 
 
 for _ in range(L) :
