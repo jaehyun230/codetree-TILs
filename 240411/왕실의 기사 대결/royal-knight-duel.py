@@ -34,10 +34,7 @@ def knights_init() :
 
 # 왕 움직여라 명령어 수행
 def attack(knight_num, move_d) :
-    global knights_alive
-    global knights_score
-    global knights
-
+    
     q = deque()
     q.append(knight_num)
 
