@@ -104,7 +104,7 @@ def crash(power, direct, santa_num, check) :
         santa[santa_num] = [mx, my]
 
         # 밀린 위치에 다른 산타가 있는경우 해당 방향으로 푸쉬하기
-        if graph[mx][my] != -1 :
+        if graph[mx][my] != -1 and graph[mx][my] != santa_num:
             push(direct, graph[mx][my], check)
 
     else :
