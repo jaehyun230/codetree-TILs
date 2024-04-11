@@ -78,7 +78,7 @@ def push(direct, santa_num, check) :
         santa[santa_num] = [mx, my]
         # 밀린 위치에 다른 산타가 있는경우 해당 방향으로 푸쉬하기
         if graph[mx][my] != -1:
-            push(direct, graph[mx][my])
+            push(direct, graph[mx][my], check)
 
     # 격자 밖으로 밀린경우 탈락 처리
     else:
