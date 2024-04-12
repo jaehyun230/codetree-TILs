@@ -1,6 +1,4 @@
 # 꼬리잡기놀이
-import sys
-sys.stdin = open("test.txt", "r")
 
 from collections import deque
 
