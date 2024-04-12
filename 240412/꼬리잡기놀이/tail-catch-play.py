@@ -1,5 +1,3 @@
-# 꼬리잡기놀이
-
 from collections import deque
 
 N, M, K = map(int, input().split())
@@ -24,10 +22,10 @@ for i in range(N) :
             team.append([i, j])
 
 def tail_change(x, y, x2, y2, idx) :
-    print(graph)
+
     graph[x][y], graph[x2][y2] = 3, 1
     team[idx] = [x2, y2]
-    print(graph)
+
 
 def get_score_and_find_head_tail(x,y) :
     global score
@@ -128,6 +126,7 @@ def team_move(x, y, num) :
                 q.append([mx, my, 3])
                 visited[x][y] = True
                 graph[mx][my] = 1
+                team[num] = [mx, my]
                 graph[x][y] = 2
 
     if check == True :
@@ -153,6 +152,8 @@ def team_move(x, y, num) :
                     if graph[mx][my] == 4 :
                         # 현재 캐릭이 가진 값으로 이동
                         graph[mx][my] = nv
+                        if nv == 1 :
+                            team[num] = [mx, my]
                         # 방문 처리
                         visited[mx][my] = True
 
@@ -165,6 +166,7 @@ def team_move(x, y, num) :
                         graph[nx][ny] = 3
                         graph[mx][my] = 4
                         visited[mx][my] = True
+
 
 def all_team_move():
     for idx, head in enumerate(team) :
