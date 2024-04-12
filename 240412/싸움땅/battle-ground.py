@@ -124,7 +124,7 @@ def all_player_move() :
 
         if 0 <= mx < N and 0 <= my < N :
             # 만약 해당 위치에 플레이어가 존재 한다면
-            if player_graph[mx][my] != - 1 and idx != player_graph[mx][my] :
+            if player_graph[mx][my] != -1 and idx != player_graph[mx][my] :
                 player_graph[x][y] = -1
                 player[idx] = [mx, my, d, s, g]
                 fight(idx, player_graph[mx][my])
@@ -146,8 +146,10 @@ def all_player_move() :
             mx = x + dx[d]
             my = y + dy[d]
 
-            if player_graph[mx][my] != -1 and idx != player_graph[mx][my]:
-                fight(idx, graph[mx][my])
+            if player_graph[mx][my] != -1 and idx != player_graph[mx][my] :
+                player_graph[x][y] = -1
+                player[idx] = [mx, my, d, s, g]
+                fight(idx, player_graph[mx][my])
 
             else :
                 player_graph[x][y] = -1
