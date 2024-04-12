@@ -72,20 +72,20 @@ def left_to_right_shot(t) :
             break
 
 def down_to_up_shot(t) :
-    for i in range(t) :
-        if graph[N-1+i][t] != 0 and graph[N-1+i][t] != 4:
-            hx, hy, tx, ty, idx = get_score_and_find_head_tail(N-1+i, t)
+    for i in range(N) :
+        if graph[N-1-i][t] != 0 and graph[N-1-i][t] != 4:
+            hx, hy, tx, ty, idx = get_score_and_find_head_tail(N-1-i, t)
             tail_change(hx, hy, tx, ty, idx)
             break
 
 def right_to_left_shot(t) :
-    for i in range(t) :
+    for i in range(N) :
         if graph[N-1-t][N-i-1] != 0 and graph[N-1-t][N-i-1] != 4:
             hx, hy, tx, ty, idx = get_score_and_find_head_tail(N-1-t, N-i-1)
             tail_change(hx, hy, tx, ty, idx)
             break
 def up_to_down_shot(t) :
-    for i in range(t) :
+    for i in range(N) :
         if graph[i][N-1-t] != 0 and graph[N-1-t][N-i-1] != 4:
             hx, hy, tx, ty, idx = get_score_and_find_head_tail(i, N-1-t)
             tail_change(hx, hy, tx, ty, idx)
