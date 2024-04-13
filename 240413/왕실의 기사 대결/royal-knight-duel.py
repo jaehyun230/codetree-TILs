@@ -99,7 +99,8 @@ def order(num, d) :
 knight_graph_update()
 for _ in range(Q) :
     num, direct = map(int, input().split())
-    order(num-1, direct)
+    if knights_alive[num-1] == True :
+        order(num-1, direct)
 
 answer = 0
 
