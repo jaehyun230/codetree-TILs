@@ -48,7 +48,6 @@ def order(num, d) :
     q = deque()
     q.append(num)
 
-    visited =[[False] *N for _ in range(N)]
 
     damage_temp = [0] * M
 
@@ -61,8 +60,7 @@ def order(num, d) :
                 mx = i + dx[d]
                 my = j + dy[d]
 
-                if 0 <= mx < N and 0 <= my < N and visited[mx][my] == False and graph[mx][my] != 2 :
-                    visited[mx][my] = True
+                if 0 <= mx < N and 0 <= my < N and graph[mx][my] != 2 :
                     if knights_graph[mx][my] != -1 :
                         # 해당 기사 아직 연쇄작용 한적없으면 연쇄 작용 등록
                         if knights_graph[mx][my] not in move_set :
